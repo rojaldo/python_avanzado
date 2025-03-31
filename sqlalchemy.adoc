@@ -1,0 +1,429 @@
+= SQLAlchemy
+:toc:
+:toclevels: 3
+:source-highlighter: highlight.js
+
+== Módulo 1: Introducción a SQLAlchemy
+
+=== ¿Qué es SQLAlchemy?
+SQLAlchemy es una biblioteca de Python que proporciona un conjunto de herramientas para trabajar con bases de datos de manera eficiente y flexible. Permite realizar consultas y gestionar la interacción con bases de datos utilizando un enfoque orientado a objetos, facilitando la abstracción de las operaciones SQL.
+
+=== Instalación de SQLAlchemy
+La instalación de SQLAlchemy se puede realizar fácilmente utilizando `pip`. Es recomendable hacerlo en un entorno virtual para mantener las dependencias organizadas.
+
+[source, python]
+----
+pip install SQLAlchemy
+----
+
+=== Conexión a bases de datos
+SQLAlchemy permite conectarse a varias bases de datos mediante cadenas de conexión. Puedes usar diferentes motores de bases de datos, como SQLite, PostgreSQL o MySQL.
+
+==== Crear una conexión
+Aquí se muestra cómo crear una conexión a una base de datos SQLite.
+
+[source, python]
+----
+from sqlalchemy import create_engine
+
+# Crear una conexión a una base de datos SQLite
+engine = create_engine('sqlite:///mi_base_de_datos.db')
+print("Conexión establecida con éxito")
+----
+
+
+== Módulo 2: Modelado de datos
+
+=== Definición de modelos
+En SQLAlchemy, los modelos representan las tablas de la base de datos y se definen utilizando clases de Python. Cada clase mapea una tabla y cada atributo de la clase mapea una columna.
+
+==== Ejemplo de definición de un modelo
+Aquí se muestra un ejemplo de cómo definir un modelo para una tabla de usuarios.
+
+[source, python]
+----
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy import Column, Integer, String
+
+# Crear una base declarativa
+Base = declarative_base()
+
+# Definición del modelo
+class Usuario(Base):
+    __tablename__ = 'usuarios'
+    
+    id = Column(Integer, primary_key=True)
+    nombre = Column(String)
+    edad = Column(Integer)
+----
+    
+=== Tipos de datos en SQLAlchemy
+SQLAlchemy proporciona varios tipos de datos para definir las columnas de las tablas. Algunos de los tipos más comunes son:
+
+- **Integer**: Para números enteros.
+- **String**: Para cadenas de texto.
+- **Float**: Para números de punto flotante.
+- **Date**: Para fechas.
+- **Boolean**: Para valores booleanos.
+
+=== Creación de tablas
+Las tablas se pueden crear en la base de datos utilizando el método `create_all()` del motor de conexión.
+
+==== Crear tablas en la base de datos
+El siguiente código muestra cómo crear las tablas definidas por los modelos en la base de datos.
+
+[source, python]
+----
+# Crear las tablas en la base de datos
+Base.metadata.create_all(engine)
+print("Tablas creadas con éxito")
+----
+
+== Módulo 3: Operaciones CRUD
+
+=== Crear registros
+Las operaciones CRUD (Crear, Leer, Actualizar y Eliminar) son fundamentales para interactuar con la base de datos. Para crear registros, se instancian objetos del modelo y se añaden a la sesión.
+
+==== Ejemplo de creación de registros
+A continuación se muestra cómo crear un nuevo registro en la tabla de usuarios.
+
+[source, python]
+----
+from sqlalchemy.orm import sessionmaker
+
+# Crear una sesión
+Session = sessionmaker(bind=engine)
+session = Session()
+
+# Crear un nuevo usuario
+nuevo_usuario = Usuario(nombre='Juan', edad=30)
+
+# Añadir el usuario a la sesión
+session.add(nuevo_usuario)
+
+# Confirmar los cambios
+session.commit()
+print("Registro creado con éxito")
+----
+
+=== Leer registros
+Para leer registros, se pueden realizar consultas utilizando la sesión. Se pueden obtener todos los registros o filtrarlos según ciertos criterios.
+
+==== Ejemplo de lectura de registros
+Aquí se muestra cómo leer todos los usuarios de la base de datos.
+
+[source, python]
+----
+# Leer todos los usuarios
+usuarios = session.query(Usuario).all()
+for usuario in usuarios:
+    print(f"ID: {usuario.id}, Nombre: {usuario.nombre}, Edad: {usuario.edad}")
+----
+
+=== Actualizar registros
+Para actualizar un registro, primero se recupera el objeto de la base de datos, se modifica y luego se confirma la sesión.
+
+==== Ejemplo de actualización de registros
+A continuación se muestra cómo actualizar la edad de un usuario específico.
+
+[source, python]
+----
+# Buscar un usuario por ID
+usuario_a_actualizar = session.query(Usuario).filter_by(id=1).first()
+
+# Modificar la edad
+if usuario_a_actualizar:
+    usuario_a_actualizar.edad = 31
+    session.commit()
+    print("Registro actualizado con éxito")
+else:
+    print("Usuario no encontrado")
+----
+
+=== Eliminar registros
+Para eliminar un registro, se busca el objeto correspondiente y se utiliza el método `delete()`.
+
+==== Ejemplo de eliminación de registros
+Aquí se muestra cómo eliminar un usuario de la base de datos.
+
+[source, python]
+----
+# Buscar un usuario por ID
+usuario_a_eliminar = session.query(Usuario).filter_by(id=1).first()
+
+# Eliminar el usuario
+if usuario_a_eliminar:
+    session.delete(usuario_a_eliminar)
+    session.commit()
+    print("Registro eliminado con éxito")
+else:
+    print("Usuario no encontrado")
+
+# Cerrar la sesión
+session.close()
+----
+
+== Módulo 4: Consultas avanzadas
+
+=== Consultas utilizando `query()`
+El método `query()` de SQLAlchemy permite realizar consultas sobre los modelos definidos, proporcionando un enfoque intuitivo para interactuar con la base de datos.
+
+==== Ejemplo de consultas básicas
+A continuación se muestra cómo realizar una consulta básica para obtener todos los registros de la tabla de usuarios.
+
+[source, python]
+----
+# Leer todos los usuarios
+todos_los_usuarios = session.query(Usuario).all()
+for usuario in todos_los_usuarios:
+    print(f"ID: {usuario.id}, Nombre: {usuario.nombre}, Edad: {usuario.edad}")
+----
+
+=== Filtros y ordenamiento
+SQLAlchemy permite aplicar filtros y ordenar los resultados de las consultas mediante el uso de métodos como `filter()` y `order_by()`.
+
+==== Ejemplo de filtros
+Aquí se muestra cómo filtrar los usuarios por edad.
+
+[source, python]
+----
+# Filtrar usuarios mayores de 25 años
+usuarios_filtrados = session.query(Usuario).filter(Usuario.edad > 25).all()
+for usuario in usuarios_filtrados:
+    print(f"ID: {usuario.id}, Nombre: {usuario.nombre}, Edad: {usuario.edad}")
+----
+
+==== Ejemplo de ordenamiento
+A continuación se muestra cómo ordenar los usuarios por nombre.
+
+[source, python]
+----
+# Ordenar usuarios por nombre
+usuarios_ordenados = session.query(Usuario).order_by(Usuario.nombre).all()
+for usuario in usuarios_ordenados:
+    print(f"ID: {usuario.id}, Nombre: {usuario.nombre}, Edad: {usuario.edad}")
+----
+
+=== Uniones de tablas
+SQLAlchemy facilita la realización de uniones entre tablas, permitiendo consultar datos relacionados de diferentes modelos.
+
+==== Ejemplo de uniones
+Supongamos que tenemos otro modelo llamado `Articulo` y queremos unirlo con `Usuario`.
+
+[source, python]
+----
+class Articulo(Base):
+    __tablename__ = 'articulos'
+    
+    id = Column(Integer, primary_key=True)
+    titulo = Column(String)
+    usuario_id = Column(Integer)
+
+# Crear tablas
+Base.metadata.create_all(engine)
+
+# Consultar artículos junto con los usuarios
+articulos_con_usuarios = session.query(Articulo).join(Usuario).all()
+for articulo in articulos_con_usuarios:
+    print(f"Articulo ID: {articulo.id}, Titulo: {articulo.titulo}, Usuario ID: {articulo.usuario_id}")
+----
+
+== Módulo 5: Relaciones entre tablas
+
+=== Relaciones uno a uno
+Las relaciones uno a uno permiten que un registro en una tabla esté vinculado a un único registro en otra tabla. Se establece utilizando una clave foránea en una de las tablas.
+
+==== Ejemplo de relación uno a uno
+Supongamos que queremos crear un modelo `Perfil` que tenga una relación uno a uno con el modelo `Usuario`.
+
+[source, python]
+----
+class Perfil(Base):
+    __tablename__ = 'perfiles'
+    
+    id = Column(Integer, primary_key=True)
+    usuario_id = Column(Integer, ForeignKey('usuarios.id'))
+    biografia = Column(String)
+
+# Crear tablas
+Base.metadata.create_all(engine)
+
+# Establecer relación en el modelo Usuario
+Usuario.perfil = relationship("Perfil", back_populates="usuario")
+Perfil.usuario = relationship("Usuario", back_populates="perfil")
+----
+
+=== Relaciones uno a muchos
+Las relaciones uno a muchos permiten que un registro en una tabla esté vinculado a múltiples registros en otra tabla. Esto se logra utilizando una clave foránea en la tabla "muchos".
+
+==== Ejemplo de relación uno a muchos
+En este ejemplo, un usuario puede tener múltiples artículos.
+
+[source, python]
+----
+class Articulo(Base):
+    __tablename__ = 'articulos'
+    
+    id = Column(Integer, primary_key=True)
+    titulo = Column(String)
+    usuario_id = Column(Integer, ForeignKey('usuarios.id'))
+
+# Establecer relación en el modelo Usuario
+Usuario.articulos = relationship("Articulo", back_populates="usuario")
+Articulo.usuario = relationship("Usuario", back_populates="articulos")
+----
+
+=== Relaciones muchos a muchos
+Las relaciones muchos a muchos permiten que múltiples registros de una tabla estén vinculados a múltiples registros de otra tabla. Esto se implementa utilizando una tabla intermedia que contiene las claves foráneas de ambas tablas.
+
+==== Ejemplo de relación muchos a muchos
+Supongamos que tenemos un modelo `Etiqueta` que puede estar asociado a múltiples artículos y viceversa.
+
+[source, python]
+----
+# Tabla intermedia
+articulo_etiqueta = Table('articulo_etiqueta', Base.metadata,
+    Column('articulo_id', Integer, ForeignKey('articulos.id')),
+    Column('etiqueta_id', Integer, ForeignKey('etiquetas.id'))
+)
+
+class Etiqueta(Base):
+    __tablename__ = 'etiquetas'
+    
+    id = Column(Integer, primary_key=True)
+    nombre = Column(String)
+
+# Establecer relaciones
+Articulo.etiquetas = relationship("Etiqueta", secondary=articulo_etiqueta, back_populates="articulos")
+Etiqueta.articulos = relationship("Articulo", secondary=articulo_etiqueta, back_populates="etiquetas")
+
+# Crear tablas
+Base.metadata.create_all(engine)
+----
+
+== Módulo 6: Manejo de transacciones
+
+=== Uso de sesiones
+Las sesiones en SQLAlchemy son utilizadas para interactuar con la base de datos y agrupar las operaciones en transacciones. Se crea una sesión que permite realizar múltiples operaciones y luego confirmar o revertir los cambios.
+
+==== Crear y usar sesiones
+Aquí se muestra cómo crear una sesión y realizar operaciones dentro de ella.
+
+[source, python]
+----
+from sqlalchemy.orm import sessionmaker
+
+# Crear una sesión
+Session = sessionmaker(bind=engine)
+session = Session()
+
+# Realizar operaciones dentro de la sesión
+nuevo_usuario = Usuario(nombre='Ana', edad=25)
+session.add(nuevo_usuario)
+
+# Cerrar la sesión (aún no se ha confirmado)
+session.close()
+----
+
+=== Confirmación y reversión de transacciones
+Después de realizar operaciones dentro de una sesión, es fundamental confirmar los cambios para que se apliquen a la base de datos. Si ocurre un error, se puede revertir la transacción.
+
+==== Confirmar transacciones
+Para confirmar una transacción y guardar los cambios, se utiliza el método `commit()`.
+
+[source, python]
+----
+try:
+    session = Session()
+    # Realizar operaciones
+    otro_usuario = Usuario(nombre='Luis', edad=22)
+    session.add(otro_usuario)
+    
+    # Confirmar los cambios
+    session.commit()
+    print("Transacción confirmada")
+except Exception as e:
+    session.rollback()  # Revertir cambios en caso de error
+    print(f"Error: {e}")
+finally:
+    session.close()  # Cerrar la sesión
+----
+
+==== Revertir transacciones
+Si se produce un error durante una operación, se puede utilizar el método `rollback()` para revertir cualquier cambio realizado en la sesión.
+
+[source, python]
+----
+# Ejemplo de reversión de transacciones
+try:
+    session = Session()
+    # Realizar operaciones
+    usuario_invalido = Usuario(nombre='Carlos', edad='treinta')  # Edad inválida
+    session.add(usuario_invalido)
+    
+    # Confirmar cambios
+    session.commit()
+except Exception as e:
+    session.rollback()  # Revertir cambios en caso de error
+    print("Transacción revertida debido a un error:", e)
+finally:
+    session.close()  # Cerrar la sesión
+----
+
+
+== Módulo 7: Migrations con Alembic
+
+=== Introducción a Alembic
+Alembic es una herramienta de migración de bases de datos para SQLAlchemy, que permite gestionar cambios en la estructura de la base de datos de manera eficiente y controlada. Proporciona un sistema de versiones que ayuda a aplicar y revertir cambios en el esquema.
+
+==== Instalación de Alembic
+Para instalar Alembic, se puede utilizar `pip` en el entorno virtual donde está configurado tu proyecto.
+
+[source, bash]
+----
+pip install alembic
+----
+
+=== Creación y gestión de migraciones
+Una vez que Alembic está instalado, se puede inicializar en un proyecto existente para gestionar las migraciones.
+
+==== Inicializar Alembic
+Para iniciar Alembic en tu proyecto, ejecuta el siguiente comando en la terminal:
+
+[source, bash]
+----
+alembic init migrations
+----
+
+Esto creará un directorio llamado `migrations` que contiene un archivo de configuración y una estructura de directorios para las migraciones.
+
+==== Generar migraciones
+Para generar una nueva migración basada en cambios en los modelos, se utiliza el comando `alembic revision`.
+
+[source, bash]
+----
+alembic revision --autogenerate -m "mensaje de la migración"
+----
+
+=== Actualización de esquemas de bases de datos
+Una vez que se han creado las migraciones, se pueden aplicar a la base de datos utilizando el comando `alembic upgrade`.
+
+==== Aplicar migraciones
+Para aplicar las migraciones pendientes a la base de datos, utiliza el siguiente comando:
+
+[source, bash]
+----
+alembic upgrade head
+----
+
+Esto actualizará la base de datos a la última versión definida en las migraciones.
+
+==== Revertir migraciones
+Si es necesario revertir una migración, se puede utilizar el comando `alembic downgrade` seguido de la versión a la que se desea regresar.
+
+[source, bash]
+----
+alembic downgrade -1  # Revertir la última migración
+----
+
+

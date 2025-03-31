@@ -1,0 +1,841 @@
+= NumPy
+:toc:
+:toclevels: 3
+:source-highlighter: highlight.js
+
+== Módulo 1: Introducción a NumPy
+
+=== ¿Qué es NumPy?
+NumPy es una biblioteca fundamental para la computación científica en Python. Proporciona soporte para arrays multidimensionales y matrices, así como una amplia colección de funciones matemáticas para operar sobre estos arrays.
+
+=== Instalación de NumPy
+Puedes instalar NumPy utilizando `pip`, el gestor de paquetes de Python. Abre tu terminal o línea de comandos y ejecuta el siguiente comando:
+
+[source,python]
+----
+pip install numpy
+----
+
+=== Estructuras de datos en NumPy
+NumPy ofrece principalmente dos estructuras de datos:
+
+==== Arrays en Numpy (ndarray)
+
+===== Creación de Arrays
+
+Puedes crear arrays en Numpy de diversas maneras, a partir de listas o utilizando funciones específicas.
+
+[source,python]
+----
+import numpy as np
+
+# Crear un array a partir de una lista
+arr = np.array([1, 2, 3, 4, 5])
+
+# Crear un array 2D (matriz)
+matriz = np.array([[1, 2, 3], [4, 5, 6]])
+
+print(arr)
+print(matriz)
+----
+
+===== Funciones para Crear Arrays
+
+Numpy ofrece varias funciones para crear arrays de manera rápida, dependiendo del tipo de datos que necesites:
+
+[source,python]
+----
+# Array de ceros
+zeros = np.zeros((3, 3)) 
+
+# Array de unos
+ones = np.ones((2, 4)) 
+
+# Array con un rango de números
+rango = np.arange(0, 10, 2)
+
+# Array con números aleatorios
+aleatorios = np.random.rand(3, 3)
+
+print(zeros)
+print(ones)
+print(rango)
+print(aleatorios)
+----
+
+===== Propiedades de un Array
+
+Cada array `ndarray` tiene varias propiedades útiles, como el número de dimensiones, forma y tipo de datos.
+
+[source,python]
+----
+# Crear un array
+arr = np.array([[1, 2, 3], [4, 5, 6]])
+
+# Obtener la forma del array (dimensiones)
+print(arr.shape)  # (2, 3)
+
+# Número de dimensiones
+print(arr.ndim)  # 2
+
+# Tipo de datos de los elementos
+print(arr.dtype)  # int64
+----
+
+===== Operaciones con Arrays
+
+Numpy permite realizar operaciones matemáticas de manera vectorizada, lo que mejora significativamente el rendimiento en comparación con los bucles.
+
+[source,python]
+----
+# Crear arrays
+a = np.array([1, 2, 3])
+b = np.array([4, 5, 6])
+
+# Operaciones aritméticas
+suma = a + b
+resta = a - b
+producto = a * b
+division = a / b
+
+print(suma)     # [5 7 9]
+print(resta)    # [-3 -3 -3]
+print(producto) # [4 10 18]
+print(division) # [0.25 0.4  0.5]
+----
+
+===== Indexación y Slicing
+
+Al igual que las listas de Python, los arrays de Numpy pueden ser indexados y rebanados (slicing) para acceder a subconjuntos de los datos.
+
+[source,python]
+----
+# Crear un array 2D
+arr = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
+
+# Acceder a un elemento específico
+print(arr[0, 2])  # 3
+
+# Acceder a una fila completa
+print(arr[1, :])  # [4 5 6]
+
+# Acceder a una columna completa
+print(arr[:, 1])  # [2 5 8]
+
+# Rebanado de un subarray
+print(arr[0:2, 1:3])  # [[2 3], [5 6]]
+----
+
+===== Cambiar la Forma de un Array (reshape)
+
+Puedes cambiar la forma de un array sin alterar sus datos utilizando `reshape`.
+
+[source,python]
+----
+# Crear un array 1D
+arr = np.arange(1, 7)
+
+# Cambiarlo a un array 2D de 2x3
+arr_reshaped = arr.reshape(2, 3)
+
+print(arr_reshaped)
+----
+
+===== Operaciones Matemáticas Comunes
+
+Numpy incluye funciones matemáticas predefinidas para operaciones como suma, promedio, máximos, mínimos, etc.
+
+[source,python]
+----
+arr = np.array([[1, 2, 3], [4, 5, 6]])
+
+# Suma de todos los elementos
+print(np.sum(arr))  # 21
+
+# Promedio
+print(np.mean(arr))  # 3.5
+
+# Máximo y mínimo
+print(np.max(arr))  # 6
+print(np.min(arr))  # 1
+
+# Suma a lo largo de un eje (filas o columnas)
+print(np.sum(arr, axis=0))  # Suma por columna: [5 7 9]
+print(np.sum(arr, axis=1))  # Suma por fila: [6 15]
+----
+
+===== Broadcasting
+
+Numpy permite realizar operaciones entre arrays de diferentes formas mediante el concepto de broadcasting, lo que facilita la aplicación de operaciones sin la necesidad de bucles explícitos.
+
+[source,python]
+----
+# Crear un array
+arr = np.array([[1, 2, 3], [4, 5, 6]])
+
+# Sumar un escalar a cada elemento
+print(arr + 10)  # [[11 12 13], [14 15 16]]
+
+# Sumar un array 1D a un array 2D
+arr2 = np.array([1, 2, 3])
+print(arr + arr2)  # [[2 4 6], [5 7 9]]
+----
+
+==== Matrices
+
+En **Numpy**, las **matrices** son una subclase de arrays que permiten realizar cálculos matemáticos y algebraicos de manera eficiente. Aunque Numpy usa principalmente arrays `ndarray` para representar datos, también es posible trabajar con **matrices** utilizando la clase `matrix`, aunque se recomienda trabajar con arrays multidimensionales (`ndarray`) en la mayoría de los casos.
+
+===== Creación de Matrices
+
+Puedes crear matrices en Numpy a partir de listas anidadas o utilizando funciones específicas.
+
+[source,python]
+----
+import numpy as np
+
+# Crear una matriz 2x2 a partir de una lista
+matriz = np.matrix([[1, 2], [3, 4]])
+print(matriz)
+
+# Crear una matriz de ceros de tamaño 3x3
+matriz_ceros = np.zeros((3, 3))
+print(matriz_ceros)
+
+# Crear una matriz identidad
+matriz_identidad = np.eye(3)
+print(matriz_identidad)
+----
+
+===== Operaciones con Matrices
+
+Las operaciones algebraicas entre matrices son muy comunes en Numpy, como la multiplicación, transposición y determinante.
+
+[source,python]
+----
+# Crear dos matrices
+A = np.matrix([[1, 2], [3, 4]])
+B = np.matrix([[5, 6], [7, 8]])
+
+# Multiplicación de matrices
+producto = A * B
+print("Producto de matrices:\n", producto)
+
+# Transposición de una matriz
+transpuesta = A.T
+print("Matriz transpuesta:\n", transpuesta)
+
+# Inversa de una matriz
+inversa = np.linalg.inv(A)
+print("Matriz inversa:\n", inversa)
+----
+
+===== Operaciones Elemento a Elemento
+
+Si deseas realizar operaciones elemento a elemento (como en arrays), puedes convertir las matrices en arrays.
+
+[source,python]
+----
+# Sumar dos matrices elemento a elemento
+suma_elemento = np.add(A, B)
+print("Suma elemento a elemento:\n", suma_elemento)
+
+# Elevar al cuadrado cada elemento
+cuadrado_elementos = np.power(A, 2)
+print("Cuadrado de cada elemento:\n", cuadrado_elementos)
+----
+
+===== Determinante y Rango de una Matriz
+
+Puedes calcular el determinante y el rango de una matriz utilizando las funciones de Numpy.
+
+[source,python]
+----
+# Crear una matriz
+matriz = np.matrix([[1, 2], [3, 4]])
+
+# Determinante
+determinante = np.linalg.det(matriz)
+print("Determinante de la matriz:", determinante)
+
+# Rango
+rango = np.linalg.matrix_rank(matriz)
+print("Rango de la matriz:", rango)
+----
+
+===== Solución de Sistemas de Ecuaciones Lineales
+
+Numpy facilita la resolución de sistemas de ecuaciones lineales de la forma `Ax = b`, donde `A` es una matriz de coeficientes y `b` es un vector de constantes.
+
+[source,python]
+----
+# Coeficientes de la matriz A
+A = np.array([[3, 1], [1, 2]])
+
+# Vector de constantes b
+b = np.array([9, 8])
+
+# Resolver el sistema de ecuaciones
+solucion = np.linalg.solve(A, b)
+print("Solución del sistema de ecuaciones:", solucion)
+----
+
+
+== Módulo 2: Operaciones básicas con arrays
+
+=== Operaciones aritméticas
+NumPy permite realizar operaciones aritméticas sobre los arrays de forma vectorizada, lo que significa que puedes operar en todos los elementos a la vez.
+
+==== Sumas y restas
+Puedes sumar o restar un valor a todos los elementos de un array o entre dos arrays.
+
+[source,python]
+----
+# Sumar un valor a todos los elementos de un array
+array_suma = array_1d + 5
+print(array_suma)
+
+# Sumar dos arrays
+array_2 = np.array([10, 20, 30, 40, 50])
+resultado_suma = array_1d + array_2
+print(resultado_suma)
+----
+
+==== Multiplicación y división
+Las operaciones de multiplicación y división también se pueden realizar de manera similar.
+
+[source,python]
+----
+# Multiplicar todos los elementos por un valor
+array_multiplicado = array_1d * 2
+print(array_multiplicado)
+
+# Dividir todos los elementos por un valor
+array_dividido = array_1d / 2
+print(array_dividido)
+----
+
+==== Operaciones element-wise
+Puedes realizar operaciones aritméticas entre arrays de la misma forma.
+
+[source,python]
+----
+# Multiplicación elemento a elemento
+resultado_multiplicacion = array_1d * array_2
+print(resultado_multiplicacion)
+----
+
+
+== Módulo 3: Manipulación de Arrays
+
+En este módulo, exploraremos las diferentes formas de crear, modificar y manipular arrays en Python utilizando **Numpy**. Los arrays son estructuras de datos fundamentales para el procesamiento numérico, ya que permiten almacenar y operar sobre grandes cantidades de datos de manera eficiente.
+
+=== 3.1. Creación de Arrays
+
+Aprenderemos a crear arrays utilizando varias técnicas y funciones ofrecidas por Numpy.
+
+[source,python]
+----
+import numpy as np
+
+# Crear un array 1D a partir de una lista
+arr_1d = np.array([1, 2, 3, 4, 5])
+
+# Crear un array 2D (matriz)
+arr_2d = np.array([[1, 2, 3], [4, 5, 6]])
+
+# Crear un array de ceros
+arr_zeros = np.zeros((3, 3))
+
+# Crear un array de unos
+arr_ones = np.ones((2, 4))
+
+# Crear un array con un rango de valores
+arr_range = np.arange(0, 10, 2)
+----
+
+=== 3.2. Indexación y Slicing
+
+Veremos cómo acceder a elementos específicos en arrays unidimensionales y multidimensionales, y cómo extraer subarrays utilizando el slicing.
+
+[source,python]
+----
+# Crear un array 2D
+arr = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
+
+# Acceder a un elemento específico
+print(arr[1, 2])  # 6
+
+# Acceder a una fila completa
+print(arr[1, :])  # [4 5 6]
+
+# Acceder a una columna completa
+print(arr[:, 1])  # [2 5 8]
+
+# Rebanado de un subarray (slice)
+print(arr[0:2, 1:3])  # [[2 3], [5 6]]
+----
+
+=== 3.3. Modificación de Arrays
+
+Aprenderemos a modificar los valores de un array y a cambiar su forma mediante funciones como `reshape`.
+
+[source,python]
+----
+# Modificar el valor de un elemento
+arr[1, 2] = 10
+print(arr)  # [[1 2 3], [4 5 10], [7 8 9]]
+
+# Cambiar la forma de un array
+arr_reshaped = arr.reshape(1, 9)
+print(arr_reshaped)  # [[1 2 3 4 5 10 7 8 9]]
+----
+
+=== 3.4. Operaciones Matemáticas en Arrays
+
+Exploraremos cómo realizar operaciones matemáticas sobre arrays de manera eficiente, como la suma, multiplicación, etc.
+
+[source,python]
+----
+# Crear arrays
+a = np.array([1, 2, 3])
+b = np.array([4, 5, 6])
+
+# Suma
+suma = a + b
+print(suma)  # [5 7 9]
+
+# Producto
+producto = a * b
+print(producto)  # [4 10 18]
+
+# Sumar un escalar a todos los elementos
+arr_sumado = a + 10
+print(arr_sumado)  # [11 12 13]
+----
+
+=== 3.5. Funciones Agregadas
+
+Numpy proporciona varias funciones para realizar operaciones agregadas en arrays, como suma, promedio, máximo y mínimo.
+
+[source,python]
+----
+# Crear un array 2D
+arr = np.array([[1, 2, 3], [4, 5, 6]])
+
+# Suma de todos los elementos
+print(np.sum(arr))  # 21
+
+# Promedio de los elementos
+print(np.mean(arr))  # 3.5
+
+# Máximo y mínimo
+print(np.max(arr))  # 6
+print(np.min(arr))  # 1
+----
+
+=== 3.6. Broadcasting
+
+Numpy permite realizar operaciones entre arrays de diferentes formas mediante el concepto de **broadcasting**.
+
+[source,python]
+----
+# Crear un array
+arr = np.array([[1, 2, 3], [4, 5, 6]])
+
+# Sumar un escalar a cada elemento
+print(arr + 10)  # [[11 12 13], [14 15 16]]
+
+# Sumar un array 1D a un array 2D
+arr2 = np.array([1, 2, 3])
+print(arr + arr2)  # [[2 4 6], [5 7 9]]
+----
+
+=== 3.7. Concatenación y División de Arrays
+
+Aprenderemos a concatenar múltiples arrays y a dividir un array en subarrays.
+
+[source,python]
+----
+# Concatenar dos arrays
+a = np.array([1, 2, 3])
+b = np.array([4, 5, 6])
+concatenado = np.concatenate((a, b))
+print(concatenado)  # [1 2 3 4 5 6]
+
+# Dividir un array en subarrays
+arr = np.array([1, 2, 3, 4, 5, 6])
+dividido = np.split(arr, 3)
+print(dividido)  # [array([1, 2]), array([3, 4]), array([5, 6])]
+----
+
+=== 3.8. Arrays de N Dimensiones
+
+Además de arrays 1D y 2D, también podemos trabajar con arrays de más dimensiones.
+
+[source,python]
+----
+# Crear un array 3D (3 matrices de 2x2)
+arr_3d = np.array([[[1, 2], [3, 4]], [[5, 6], [7, 8]], [[9, 10], [11, 12]]])
+
+# Acceder a un elemento en un array 3D
+print(arr_3d[0, 1, 1])  # 4
+
+# Cambiar la forma de un array 3D
+arr_reshaped = arr_3d.reshape(2, 6)
+print(arr_reshaped)
+----
+
+
+== Módulo 4: Funciones universales
+
+=== Funciones matemáticas básicas
+NumPy ofrece una amplia gama de funciones matemáticas que se pueden aplicar a los arrays de forma vectorizada.
+
+==== Suma, resta, multiplicación y división
+Puedes realizar operaciones aritméticas básicas utilizando las funciones universales de NumPy.
+
+[source,python]
+----
+import numpy as np
+
+# Crear un array
+array = np.array([1, 2, 3, 4, 5])
+
+# Sumar todos los elementos
+suma = np.sum(array)
+print(f"Suma: {suma}")
+
+# Restar todos los elementos
+resta = np.subtract(array, 2)
+print(f"Resta: {resta}")
+
+# Multiplicar todos los elementos
+multiplicacion = np.multiply(array, 3)
+print(f"Multiplicación: {multiplicacion}")
+
+# Dividir todos los elementos
+division = np.divide(array, 2)
+print(f"División: {division}")
+----
+
+==== Potencia y raíz
+Puedes elevar los elementos a una potencia específica o calcular la raíz cuadrada.
+
+[source,python]
+----
+# Elevar al cuadrado
+potencia = np.power(array, 2)
+print(f"Potencia: {potencia}")
+
+# Calcular la raíz cuadrada
+raiz = np.sqrt(array)
+print(f"Raíz cuadrada: {raiz}")
+----
+
+=== Funciones estadísticas
+NumPy también proporciona funciones para realizar cálculos estadísticos sobre los arrays.
+
+==== Media, mediana y moda
+Puedes calcular la media y la mediana de los elementos en un array.
+
+[source,python]
+----
+# Calcular la media
+media = np.mean(array)
+print(f"Media: {media}")
+
+# Calcular la mediana
+mediana = np.median(array)
+print(f"Mediana: {mediana}")
+----
+
+==== Desviación estándar y varianza
+Estas funciones permiten medir la dispersión de los datos.
+
+[source,python]
+----
+# Calcular la desviación estándar
+desviacion_estandar = np.std(array)
+print(f"Desviación estándar: {desviacion_estandar}")
+
+# Calcular la varianza
+varianza = np.var(array)
+print(f"Varianza: {varianza}")
+----
+
+=== Funciones lógicas
+Las funciones lógicas permiten realizar operaciones booleanas sobre los arrays.
+
+==== Comparaciones
+Puedes realizar comparaciones para crear arrays booleanos.
+
+[source,python]
+----
+# Comparar elementos del array
+comparacion = array > 3
+print(f"Elementos mayores que 3: {comparacion}")
+----
+
+==== Operaciones lógicas
+NumPy también permite realizar operaciones lógicas, como AND, OR y NOT.
+
+[source,python]
+----
+# Crear otro array para operaciones lógicas
+array_b = np.array([0, 1, 1, 0, 1])
+
+# Operación lógica AND
+resultado_and = np.logical_and(array > 2, array_b)
+print(f"Resultado de AND: {resultado_and}")
+
+# Operación lógica OR
+resultado_or = np.logical_or(array < 3, array_b)
+print(f"Resultado de OR: {resultado_or}")
+
+# Operación lógica NOT
+resultado_not = np.logical_not(array_b)
+print(f"Resultado de NOT: {resultado_not}")
+----
+
+
+== Módulo 5: Manejo de datos faltantes
+
+=== Identificación de datos faltantes
+NumPy permite identificar datos faltantes de manera eficiente utilizando valores especiales, como `np.nan`.
+
+==== Crear un array con datos faltantes
+Puedes crear un array que contenga datos faltantes representados como `np.nan`.
+
+[source,python]
+----
+import numpy as np
+
+# Crear un array con un dato faltante
+array_faltante = np.array([1, 2, np.nan, 4, 5])
+print(f"array con datos faltantes: {array_faltante}")
+----
+
+==== Identificar datos faltantes
+Puedes utilizar la función `np.isnan()` para identificar la ubicación de los datos faltantes en un array.
+
+[source,python]
+----
+# Identificar datos faltantes
+faltantes = np.isnan(array_faltante)
+print(f"Datos faltantes: {faltantes}")
+----
+
+=== Relleno y eliminación de datos faltantes
+Una vez identificados, puedes optar por rellenar o eliminar los datos faltantes en el array.
+
+==== Relleno de datos faltantes
+Puedes utilizar la función `np.nan_to_num()` para reemplazar `np.nan` por un valor específico, como 0 o la media del array.
+
+[source,python]
+----
+# Rellenar datos faltantes con 0
+array_rellenado = np.nan_to_num(array_faltante, nan=0)
+print(f"array con datos faltantes rellenados: {array_rellenado}")
+
+# Rellenar datos faltantes con la media del array
+media = np.nanmean(array_faltante)  # Calcular la media ignorando los NaN
+array_rellenado_media = np.where(np.isnan(array_faltante), media, array_faltante)
+print(f"array con datos faltantes rellenados con la media: {array_rellenado_media}")
+----
+
+==== Eliminación de datos faltantes
+Si prefieres eliminar los datos faltantes, puedes utilizar la función `np.isnan()` para filtrar el array.
+
+[source,python]
+----
+# Eliminar datos faltantes
+array_sin_faltantes = array_faltante[~np.isnan(array_faltante)]
+print(f"array sin datos faltantes: {array_sin_faltantes}")
+----
+
+
+== Módulo 6: Álgebra lineal
+
+=== Operaciones con matrices
+NumPy proporciona una variedad de funciones para realizar operaciones con matrices de manera eficiente.
+
+==== Creación de matrices
+Puedes crear matrices utilizando la función `np.array()` o funciones específicas como `np.eye()` para matrices identidad.
+
+[source,python]
+----
+import numpy as np
+
+# Crear una matriz 2x2
+matriz = np.array([[1, 2], [3, 4]])
+print(f"Matriz:\n{matriz}")
+
+# Crear una matriz identidad 2x2
+matriz_identidad = np.eye(2)
+print(f"Matriz identidad:\n{matriz_identidad}")
+----
+
+==== Suma y resta de matrices
+La suma y resta de matrices se realiza elemento a elemento.
+
+[source,python]
+----
+# Crear otra matriz
+matriz_b = np.array([[5, 6], [7, 8]])
+
+# Sumar matrices
+suma_matrices = matriz + matriz_b
+print(f"Suma de matrices:\n{suma_matrices}")
+
+# Restar matrices
+resta_matrices = matriz - matriz_b
+print(f"Resta de matrices:\n{resta_matrices}")
+----
+
+==== Multiplicación de matrices
+La multiplicación de matrices se puede realizar usando `np.dot()` o el operador `@`.
+
+[source,python]
+----
+# Multiplicación de matrices
+producto_matrices = np.dot(matriz, matriz_b)
+print(f"Producto de matrices:\n{producto_matrices}")
+
+# Otra forma de multiplicación usando el operador @
+producto_matrices_2 = matriz @ matriz_b
+print(f"Producto de matrices (usando @):\n{producto_matrices_2}")
+----
+
+=== Descomposición de matrices
+NumPy permite realizar descomposición de matrices, una técnica común en álgebra lineal.
+
+==== Descomposición en valores singulares (SVD)
+La descomposición en valores singulares es una técnica que descompone una matriz en tres matrices.
+
+[source,python]
+----
+# Crear una matriz aleatoria
+matriz_aleatoria = np.random.rand(4, 3)
+
+# Realizar la descomposición SVD
+U, S, Vt = np.linalg.svd(matriz_aleatoria)
+
+print(f"U:\n{U}\n")
+print(f"S (valores singulares):\n{S}\n")
+print(f"Vt:\n{Vt}\n")
+----
+
+==== Descomposición QR
+La descomposición QR descompone una matriz en un producto de una matriz ortogonal y una matriz triangular.
+
+[source,python]
+----
+# Realizar la descomposición QR
+Q, R = np.linalg.qr(matriz_aleatoria)
+
+print(f"Matriz Q (ortogonal):\n{Q}\n")
+print(f"Matriz R (triangular):\n{R}\n")
+----
+
+
+== Módulo 7: Integración con otras bibliotecas
+
+=== Integración con Pandas
+NumPy es la base de Pandas, por lo que su integración es fluida y permite realizar operaciones avanzadas de manipulación y análisis de datos.
+
+==== Creación de DataFrames a partir de arrays NumPy
+Puedes crear un DataFrame de Pandas utilizando arrays de NumPy.
+
+[source,python]
+----
+import numpy as np
+import pandas as pd
+
+# Crear un array de NumPy
+array = np.array([[1, 2, 3], [4, 5, 6]])
+
+# Crear un DataFrame a partir del array
+df = pd.DataFrame(array, columns=['Columna 1', 'Columna 2', 'Columna 3'])
+print(df)
+----
+
+==== Operaciones con DataFrames usando NumPy
+Puedes realizar operaciones de NumPy directamente sobre los datos de un DataFrame.
+
+[source,python]
+----
+# Sumar 10 a cada elemento del DataFrame
+df_modificado = df + 10
+print(df_modificado)
+
+# Calcular la media de cada columna usando NumPy
+media_columnas = np.mean(df, axis=0)
+print(f"Media de cada columna: {media_columnas}")
+----
+
+=== Integración con Matplotlib
+NumPy se puede utilizar junto con Matplotlib para crear visualizaciones gráficas efectivas de los datos.
+
+==== Creación de gráficos básicos
+Puedes utilizar arrays de NumPy como datos de entrada para crear gráficos simples.
+
+[source,python]
+----
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Crear datos
+x = np.linspace(0, 10, 100)  # 100 puntos entre 0 y 10
+y = np.sin(x)  # Función seno
+
+# Crear un gráfico
+plt.plot(x, y)
+plt.title('Gráfico de la función seno')
+plt.xlabel('x')
+plt.ylabel('sin(x)')
+plt.grid()
+plt.show()
+----
+
+==== Gráficos de dispersión
+También puedes crear gráficos de dispersión utilizando datos generados por NumPy.
+
+[source,python]
+----
+# Crear datos para un gráfico de dispersión
+x = np.random.rand(50)
+y = np.random.rand(50)
+
+# Crear un gráfico de dispersión
+plt.scatter(x, y)
+plt.title('Gráfico de dispersión')
+plt.xlabel('Eje X')
+plt.ylabel('Eje Y')
+plt.grid()
+plt.show()
+----
+
+== Módulo 8: Ejercicios
+
+.Lista de 20 problemas prácticos utilizando la librería Numpy:
+1. Crea un array de 10 elementos con valores aleatorios entre 0 y 100, y encuentra el valor mínimo y máximo.
+2. Genera un array de 100 números aleatorios y calcula la media y desviación estándar de los valores.
+3. Crea una matriz identidad de tamaño 5x5 y multiplícala por un escalar.
+4. Genera una matriz de 5x5 con números enteros aleatorios y encuentra la suma de sus filas y columnas.
+5. Convierte una lista de listas en un array 2D y calcula el determinante de la matriz resultante.
+6. Genera una secuencia de números del 0 al 1 con un paso de 0.05 y calcula el seno de cada valor.
+7. Crea dos matrices aleatorias de tamaño 3x3 y realiza su multiplicación matriz.
+8. Genera un array de 20 números aleatorios entre 1 y 10, y reemplaza todos los valores menores a 5 por ceros.
+9. Crea un array 2D con números del 1 al 9 y realiza una transposición de la matriz.
+10. Genera una matriz de ceros de 4x4, y reemplaza los valores de la diagonal principal por números aleatorios.
+11. Crea un array de números del 1 al 20 y luego reorganízalos en un array 4x5.
+12. Genera una matriz de números aleatorios entre 0 y 1, y calcula el producto de todos sus elementos.
+13. Resuelve un sistema de ecuaciones lineales de la forma Ax = b, donde A es una matriz de coeficientes y b es un vector de constantes.
+14. Crea un array de 50 elementos con valores aleatorios, redondea todos los valores a dos decimales y cuenta cuántos valores son mayores a 0.5.
+15. Genera un array de números enteros aleatorios entre 0 y 100, y encuentra el índice del valor máximo y mínimo.
+16. Crea un array 3D de tamaño 3x3x3 con valores aleatorios y selecciona una submatriz 2x2x2 de él.
+17. Genera un array con 100 números entre -10 y 10, y obtén los valores absolutos de todos los elementos.
+18. Divide un array de 20 elementos en 4 subarrays de igual tamaño y calcula la suma de cada subarray.
+19. Genera un array de números del 1 al 10 y calcula el cuadrado de cada valor utilizando broadcasting.
+20. Crea una matriz 6x6 con números aleatorios y extrae los valores de la diagonal secundaria (de la esquina superior derecha a la inferior izquierda).
+
