@@ -1,0 +1,378 @@
+= Matplotlib y Seaborn
+:toc:
+:toclevels: 2
+:source-highlighter: highlight.js
+
+La visualización de datos es una parte esencial del análisis de datos y la comunicación de información. Python cuenta con dos librerías muy poderosas para crear gráficos: **Matplotlib** y **Seaborn**. Mientras que Matplotlib es una librería de propósito general para la creación de gráficos, Seaborn extiende sus funcionalidades y proporciona una forma más fácil de crear visualizaciones estadísticas atractivas.
+
+== Matplotlib
+
+**Matplotlib** es una librería muy utilizada en Python para la creación de gráficos en 2D. Es altamente personalizable y permite crear una amplia variedad de gráficos, desde gráficos de líneas simples hasta complejas visualizaciones como gráficos de barras, histogramas y diagramas de dispersión.
+
+=== Instalación
+
+Para utilizar Matplotlib, primero debes instalarla usando `pip`, si no está ya instalada:
+
+[source,bash]
+----
+pip install matplotlib
+----
+
+Para habilitar un entorno de Jupyter Notebook, puedes usar el siguiente comando:
+[source,bash]
+----
+pip install ipykernel
+python -m ipykernel install --user --name=mi_entorno
+----
+Esto instalará Matplotlib y la configurará para su uso en Jupyter Notebook. Asegúrate de reiniciar el kernel después de la instalación.
+
+.Una vez instalada, puedes importarla en tu programa de Python:
+[source,python]
+----
+import matplotlib.pyplot as plt
+----
+
+La interfaz más común que se utiliza en Matplotlib es `pyplot`, que ofrece una forma sencilla de crear gráficos con una sintaxis similar a MATLAB.
+
+=== Creación de Gráficos
+
+Matplotlib es muy flexible, lo que permite crear gráficos complejos con detalles personalizados. A continuación se muestran algunos ejemplos básicos de los tipos más comunes de gráficos.
+
+==== Gráfico de Líneas
+
+El gráfico de líneas es uno de los gráficos más utilizados para mostrar una serie temporal o una tendencia en los datos.
+
+[source,python]
+----
+import matplotlib.pyplot as plt
+
+# Datos para el gráfico
+x = [0, 1, 2, 3, 4, 5]
+y = [0, 1, 4, 9, 16, 25]
+
+# Crear el gráfico de líneas
+plt.plot(x, y)
+
+# Añadir etiquetas y título
+plt.xlabel('Eje X')
+plt.ylabel('Eje Y')
+plt.title('Gráfico de Líneas')
+
+# Mostrar el gráfico
+plt.show()
+----
+
+Este código genera un gráfico de líneas donde el eje X muestra los valores de `x` y el eje Y los valores correspondientes de `y`.
+
+==== Gráfico de Barras
+
+El gráfico de barras es útil para comparar diferentes categorías.
+
+[source,python]
+----
+import matplotlib.pyplot as plt
+
+# Datos para el gráfico de barras
+categories = ['A', 'B', 'C', 'D']
+values = [4, 7, 1, 8]
+
+# Crear el gráfico de barras
+plt.bar(categories, values)
+
+# Añadir etiquetas y título
+plt.xlabel('Categorías')
+plt.ylabel('Valores')
+plt.title('Gráfico de Barras')
+
+# Mostrar el gráfico
+plt.show()
+----
+
+En este caso, creamos un gráfico de barras que compara el valor de diferentes categorías.
+
+==== Histograma
+
+Un histograma muestra la distribución de un conjunto de datos.
+
+[source,python]
+----
+import matplotlib.pyplot as plt
+
+# Datos para el histograma
+data = [1, 2, 2, 2, 3, 3, 3, 4, 4, 4, 5, 5, 5, 5, 5]
+
+# Crear el histograma
+plt.hist(data, bins=5, edgecolor='black')
+
+# Añadir título y etiquetas
+plt.xlabel('Valor')
+plt.ylabel('Frecuencia')
+plt.title('Histograma')
+
+# Mostrar el gráfico
+plt.show()
+----
+
+Este histograma agrupa los datos en cinco bins y muestra la frecuencia de cada valor.
+
+==== Gráfico de Dispersión
+
+El gráfico de dispersión se utiliza para mostrar la relación entre dos variables numéricas.
+
+[source,python]
+----
+import matplotlib.pyplot as plt
+
+# Datos para el gráfico de dispersión
+x = [5, 7, 8, 7, 2, 17, 2, 9, 4, 11, 12, 9, 6]
+y = [99, 86, 87, 88, 100, 86, 103, 87, 94, 78, 77, 85, 86]
+
+# Crear el gráfico de dispersión
+plt.scatter(x, y)
+
+# Añadir etiquetas y título
+plt.xlabel('Eje X')
+plt.ylabel('Eje Y')
+plt.title('Gráfico de Dispersión')
+
+# Mostrar el gráfico
+plt.show()
+----
+
+Este gráfico de dispersión permite visualizar si hay alguna relación entre las dos variables `x` e `y`.
+
+=== Personalización de Gráficos
+
+Matplotlib permite personalizar los gráficos de muchas maneras, desde cambiar los colores y estilos de las líneas hasta agregar múltiples gráficos en una misma figura.
+
+==== Cambiar el Color y Estilo de las Líneas
+
+Puedes cambiar fácilmente el color y el estilo de las líneas en un gráfico.
+
+[source,python]
+----
+plt.plot(x, y, color='red', linestyle='--', marker='o')
+plt.show()
+----
+
+Este ejemplo dibuja una línea roja, con estilo de línea discontinua (`--`) y marca los puntos con círculos (`o`).
+
+==== Subplots
+
+Matplotlib permite crear varios gráficos en una misma figura utilizando `subplots`.
+
+[source,python]
+----
+import matplotlib.pyplot as plt
+
+# Crear una figura con dos subplots
+fig, (ax1, ax2) = plt.subplots(1, 2)
+
+# Primer gráfico de líneas
+ax1.plot([1, 2, 3, 4], [10, 20, 25, 30])
+ax1.set_title('Gráfico de Líneas')
+
+# Segundo gráfico de barras
+ax2.bar(['A', 'B', 'C'], [5, 7, 3])
+ax2.set_title('Gráfico de Barras')
+
+# Mostrar ambos gráficos
+plt.show()
+----
+
+Este código crea una figura con dos subplots: uno con un gráfico de líneas y otro con un gráfico de barras.
+
+=== Resumen
+
+Matplotlib es una herramienta extremadamente versátil que permite a los usuarios crear gráficos simples y complejos con una gran capacidad de personalización. Desde gráficos de líneas y barras hasta histogramas y gráficos de dispersión, Matplotlib proporciona todas las herramientas necesarias para visualizar datos en 2D.
+
+== Seaborn
+
+**Seaborn** es una librería de visualización de datos basada en Matplotlib que proporciona una interfaz de alto nivel para crear gráficos estadísticos atractivos. Seaborn facilita la creación de gráficos complejos y mejora la estética de las visualizaciones por defecto, lo que la convierte en una excelente opción para análisis exploratorios de datos.
+
+=== Instalación
+
+Para instalar Seaborn, utiliza el siguiente comando:
+
+[source,bash]
+----
+pip install seaborn
+----
+
+Seaborn también requiere Matplotlib y Pandas, que suelen instalarse automáticamente como dependencias.
+
+=== Uso Básico de Seaborn
+
+Seaborn trabaja muy bien con `DataFrames` de Pandas, lo que permite crear gráficos directamente a partir de datos tabulares. A continuación se muestra un ejemplo básico:
+
+[source,python]
+----
+import seaborn as sns
+import matplotlib.pyplot as plt
+import pandas as pd
+
+# Crear un DataFrame simple
+data = pd.DataFrame({
+    'x': [1, 2, 3, 4, 5],
+    'y': [5, 4, 3, 2, 1],
+    'z': [1, 3, 5, 7, 9]
+})
+
+# Crear un gráfico de dispersión con Seaborn
+sns.scatterplot(x='x', y='y', data=data)
+plt.title('Gráfico de Dispersión con Seaborn')
+plt.show()
+----
+
+Este ejemplo muestra cómo crear un gráfico de dispersión con Seaborn usando un DataFrame de Pandas. El gráfico muestra la relación entre las variables `x` e `y`.
+
+=== Principales Tipos de Gráficos en Seaborn
+
+Seaborn ofrece una gran variedad de gráficos que son útiles para el análisis estadístico y exploración de datos.
+
+==== Gráfico de Dispersión
+
+El gráfico de dispersión muestra la relación entre dos variables numéricas. En Seaborn se puede crear con `scatterplot` y se puede agregar color basado en otra variable.
+
+[source,python]
+----
+sns.scatterplot(x='x', y='y', hue='z', data=data)
+plt.title('Gráfico de Dispersión con Hue')
+plt.show()
+----
+
+En este caso, el parámetro `hue` permite colorear los puntos del gráfico de acuerdo con los valores de la variable `z`.
+
+==== Gráfico de Línea
+
+El gráfico de línea se utiliza para visualizar datos a lo largo de un rango continuo, como el tiempo.
+
+[source,python]
+----
+sns.lineplot(x='x', y='z', data=data)
+plt.title('Gráfico de Línea')
+plt.show()
+----
+
+Este ejemplo genera un gráfico de líneas donde `x` es el eje de las abscisas y `z` representa los valores a lo largo de ese eje.
+
+==== Gráfico de Caja (Boxplot)
+
+Un gráfico de caja es útil para visualizar la distribución de los datos y detectar valores atípicos.
+
+[source,python]
+----
+# Cargar el dataset de ejemplo 'tips'
+tips = sns.load_dataset('tips')
+
+# Crear un gráfico de caja
+sns.boxplot(x='day', y='total_bill', data=tips)
+plt.title('Gráfico de Caja')
+plt.show()
+----
+
+Este ejemplo muestra la distribución de la variable `total_bill` por cada día de la semana en el dataset de ejemplo `tips`.
+
+==== Gráfico de Violin
+
+El gráfico de violín es una combinación entre el gráfico de caja y el gráfico de densidad, mostrando la distribución de los datos de manera más detallada.
+
+[source,python]
+----
+sns.violinplot(x='day', y='total_bill', data=tips)
+plt.title('Gráfico de Violín')
+plt.show()
+----
+
+Este gráfico no solo muestra los cuantiles de los datos, sino también la densidad estimada de las distribuciones.
+
+==== Mapa de Calor (Heatmap)
+
+Un mapa de calor es útil para visualizar matrices de datos o correlaciones entre variables.
+
+[source,python]
+----
+# Crear una matriz de correlación
+correlation_matrix = tips.corr()
+
+# Crear un mapa de calor
+sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm')
+plt.title('Mapa de Calor de Correlación')
+plt.show()
+----
+
+Este código genera un mapa de calor que muestra la correlación entre las diferentes variables del dataset `tips`, con anotaciones en cada celda para ver los valores exactos.
+
+=== Personalización de Gráficos en Seaborn
+
+Seaborn facilita la personalización de gráficos con estilos predefinidos y opciones de ajuste para colores y tamaños.
+
+==== Cambiar el Estilo del Gráfico
+
+Seaborn permite cambiar fácilmente el estilo de los gráficos usando `set_style()`.
+
+[source,python]
+----
+# Cambiar el estilo del gráfico
+sns.set_style('whitegrid')
+
+# Crear un gráfico con el nuevo estilo
+sns.lineplot(x='x', y='z', data=data)
+plt.title('Gráfico de Línea con Estilo Personalizado')
+plt.show()
+----
+
+Este código aplica el estilo `whitegrid`, que añade una cuadrícula blanca al fondo del gráfico.
+
+==== Cambiar la Paleta de Colores
+
+También se puede personalizar la paleta de colores del gráfico.
+
+[source,python]
+----
+# Cambiar la paleta de colores
+sns.set_palette('pastel')
+
+# Crear un gráfico con la nueva paleta de colores
+sns.boxplot(x='day', y='total_bill', data=tips)
+plt.title('Gráfico de Caja con Colores Pastel')
+plt.show()
+----
+
+En este ejemplo, se cambia la paleta de colores del gráfico a tonos pastel.
+
+=== Comparación entre Seaborn y Matplotlib
+
+Aunque Seaborn está construido sobre Matplotlib, las diferencias entre ambas librerías son notables:
+|=============================
+| Característica              | Matplotlib                          | Seaborn                               
+| **Flexibilidad**             | Muy alta, control detallado         | Menor flexibilidad, más enfoque en lo estadístico 
+| **Facilidad de uso**         | Complejo para gráficos personalizados | Fácil para gráficos estadísticos      
+| **Estética por defecto**     | Básica, requiere ajustes            | Gráficos atractivos por defecto       
+| **Gráficos estadísticos**    | Limitado                            | Extenso y específico para estadística 
+|=============================
+
+== Ejercicios de Representación de Datos con Matplotlib o Seaborn
+
+A continuación, te presento una lista de 10 ejercicios que pueden resolverse utilizando **Matplotlib** o **Seaborn**:
+
+1. **Gráfico de líneas**: Dibuja un gráfico de líneas que muestre la evolución de la temperatura a lo largo de los días de la semana. Asegúrate de etiquetar los ejes y agregar un título.
+
+2. **Gráfico de barras**: Crea un gráfico de barras que muestre las ventas de diferentes productos en una tienda. Etiqueta correctamente cada producto y asigna un color distinto a cada barra.
+
+3. **Histograma**: Representa un histograma que muestre la distribución de edades de un grupo de personas. Ajusta el número de "bins" para obtener un gráfico claro.
+
+4. **Gráfico de dispersión**: Crea un gráfico de dispersión para visualizar la relación entre el tamaño de un anuncio y el número de clics que recibe en una campaña publicitaria.
+
+5. **Mapa de calor**: Genera un mapa de calor que muestre las correlaciones entre varias características en un conjunto de datos de rendimiento académico (por ejemplo, asistencia, calificaciones, horas de estudio).
+
+6. **Gráfico de violín**: Utiliza un gráfico de violín para comparar la distribución de los ingresos anuales en función del nivel educativo en un conjunto de datos de encuestas laborales.
+
+7. **Subplots**: Dibuja dos gráficos en una misma figura (usando subplots), uno mostrando las ganancias anuales de una empresa como un gráfico de barras y otro mostrando la tendencia de crecimiento en un gráfico de líneas.
+
+8. **Gráfico de caja**: Representa un gráfico de caja para visualizar la dispersión de los salarios en diferentes sectores industriales y detectar posibles valores atípicos.
+
+9. **Gráfico de barras apiladas**: Crea un gráfico de barras apiladas que muestre la participación de mercado de varias marcas de automóviles durante los últimos cinco años.
+
+10. **Gráfico de áreas**: Representa un gráfico de áreas para visualizar el consumo de diferentes fuentes de energía (renovable, no renovable) a lo largo de las últimas décadas en varios países.
+

@@ -1,0 +1,7 @@
+# ignore virtualenvs
+
+.venv
+
+# ignore data directory
+
+data

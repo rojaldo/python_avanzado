@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.23">
-<title>Ejercicios Básicos de Python en Línea de Comandos</title>
+<title>Matplotlib y Seaborn</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -437,311 +437,531 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article">
 <div id="header">
-<h1>Ejercicios Básicos de Python en Línea de Comandos</h1>
+<h1>Matplotlib y Seaborn</h1>
 <div id="toc" class="toc">
-<div id="toctitle">Índice</div>
+<div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#_ejercicios_de_entradasalida_y_operaciones_básicas">Ejercicios de Entrada/Salida y Operaciones Básicas</a>
+<li><a href="#_matplotlib">Matplotlib</a>
 <ul class="sectlevel2">
-<li><a href="#_ejercicio_1_saludador_personalizado">Ejercicio 1: Saludador Personalizado</a></li>
-<li><a href="#_ejercicio_2_calculadora_de_edad_en_días">Ejercicio 2: Calculadora de Edad en Días</a></li>
-<li><a href="#_ejercicio_3_conversor_de_temperatura">Ejercicio 3: Conversor de Temperatura</a></li>
-<li><a href="#_ejercicio_4_generador_de_tablas_de_multiplicar">Ejercicio 4: Generador de Tablas de Multiplicar</a></li>
-<li><a href="#_ejercicio_5_calculadora_de_descuentos">Ejercicio 5: Calculadora de Descuentos</a></li>
+<li><a href="#_instalación">Instalación</a></li>
+<li><a href="#_creación_de_gráficos">Creación de Gráficos</a></li>
+<li><a href="#_personalización_de_gráficos">Personalización de Gráficos</a></li>
+<li><a href="#_resumen">Resumen</a></li>
 </ul>
 </li>
-<li><a href="#_ejercicios_con_estructuras_de_datos">Ejercicios con Estructuras de Datos</a>
+<li><a href="#_seaborn">Seaborn</a>
 <ul class="sectlevel2">
-<li><a href="#_ejercicio_6_gestor_de_lista_de_compras">Ejercicio 6: Gestor de Lista de Compras</a></li>
-<li><a href="#_ejercicio_7_directorio_telefónico">Ejercicio 7: Directorio Telefónico</a></li>
-<li><a href="#_ejercicio_8_ordenador_de_números">Ejercicio 8: Ordenador de Números</a></li>
-<li><a href="#_ejercicio_9_buscador_de_palabras">Ejercicio 9: Buscador de Palabras</a></li>
-<li><a href="#_ejercicio_10_calculadora_de_promedios">Ejercicio 10: Calculadora de Promedios</a></li>
+<li><a href="#_instalación_2">Instalación</a></li>
+<li><a href="#_uso_básico_de_seaborn">Uso Básico de Seaborn</a></li>
+<li><a href="#_principales_tipos_de_gráficos_en_seaborn">Principales Tipos de Gráficos en Seaborn</a></li>
+<li><a href="#_personalización_de_gráficos_en_seaborn">Personalización de Gráficos en Seaborn</a></li>
+<li><a href="#_comparación_entre_seaborn_y_matplotlib">Comparación entre Seaborn y Matplotlib</a></li>
 </ul>
 </li>
-<li><a href="#_ejercicios_de_manipulación_de_archivos">Ejercicios de Manipulación de Archivos</a>
-<ul class="sectlevel2">
-<li><a href="#_ejercicio_11_bloc_de_notas_simple">Ejercicio 11: Bloc de Notas Simple</a></li>
-<li><a href="#_ejercicio_12_registro_de_gastos">Ejercicio 12: Registro de Gastos</a></li>
-<li><a href="#_ejercicio_13_organizador_de_archivos">Ejercicio 13: Organizador de Archivos</a></li>
-<li><a href="#_ejercicio_14_logger_simple">Ejercicio 14: Logger Simple</a></li>
-<li><a href="#_ejercicio_15_gestor_de_tareas">Ejercicio 15: Gestor de Tareas</a></li>
-</ul>
-</li>
-<li><a href="#_ejercicios_de_algoritmos">Ejercicios de Algoritmos</a>
-<ul class="sectlevel2">
-<li><a href="#_ejercicio_16_validador_de_palíndromos">Ejercicio 16: Validador de Palíndromos</a></li>
-<li><a href="#_ejercicio_17_generador_de_contraseñas">Ejercicio 17: Generador de Contraseñas</a></li>
-<li><a href="#_ejercicio_18_calculadora_de_números_primos">Ejercicio 18: Calculadora de Números Primos</a></li>
-<li><a href="#_ejercicio_19_juego_de_ahorcado">Ejercicio 19: Juego de Ahorcado</a></li>
-<li><a href="#_ejercicio_20_calculadora_de_estadísticas">Ejercicio 20: Calculadora de Estadísticas</a></li>
-</ul>
-</li>
-<li><a href="#_características_sugeridas_para_cada_ejercicio">Características Sugeridas para Cada Ejercicio</a></li>
-<li><a href="#_estructura_básica_recomendada">Estructura Básica Recomendada</a></li>
-<li><a href="#_consejos_de_implementación">Consejos de Implementación</a></li>
-<li><a href="#_conceptos_python_utilizados">Conceptos Python Utilizados</a></li>
+<li><a href="#_ejercicios_de_representación_de_datos_con_matplotlib_o_seaborn">Ejercicios de Representación de Datos con Matplotlib o Seaborn</a></li>
 </ul>
 </div>
 </div>
 <div id="content">
-<div class="sect1">
-<h2 id="_ejercicios_de_entradasalida_y_operaciones_básicas">Ejercicios de Entrada/Salida y Operaciones Básicas</h2>
+<div id="preamble">
 <div class="sectionbody">
-<div class="sect2">
-<h3 id="_ejercicio_1_saludador_personalizado">Ejercicio 1: Saludador Personalizado</h3>
 <div class="paragraph">
-<p>Crea un programa que pida el nombre y la hora actual, y genere un saludo apropiado según la hora del día.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_ejercicio_2_calculadora_de_edad_en_días">Ejercicio 2: Calculadora de Edad en Días</h3>
-<div class="paragraph">
-<p>Pide la fecha de nacimiento y calcula los días vividos aproximados.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_ejercicio_3_conversor_de_temperatura">Ejercicio 3: Conversor de Temperatura</h3>
-<div class="paragraph">
-<p>Programa que convierta entre Celsius, Fahrenheit y Kelvin.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_ejercicio_4_generador_de_tablas_de_multiplicar">Ejercicio 4: Generador de Tablas de Multiplicar</h3>
-<div class="paragraph">
-<p>Crea la tabla de multiplicar del número ingresado.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_ejercicio_5_calculadora_de_descuentos">Ejercicio 5: Calculadora de Descuentos</h3>
-<div class="paragraph">
-<p>Calcula el precio final después de aplicar un descuento.</p>
-</div>
+<p>La visualización de datos es una parte esencial del análisis de datos y la comunicación de información. Python cuenta con dos librerías muy poderosas para crear gráficos: <strong>Matplotlib</strong> y <strong>Seaborn</strong>. Mientras que Matplotlib es una librería de propósito general para la creación de gráficos, Seaborn extiende sus funcionalidades y proporciona una forma más fácil de crear visualizaciones estadísticas atractivas.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_ejercicios_con_estructuras_de_datos">Ejercicios con Estructuras de Datos</h2>
+<h2 id="_matplotlib">Matplotlib</h2>
 <div class="sectionbody">
-<div class="sect2">
-<h3 id="_ejercicio_6_gestor_de_lista_de_compras">Ejercicio 6: Gestor de Lista de Compras</h3>
 <div class="paragraph">
-<p>Permite agregar, eliminar y mostrar elementos de una lista.</p>
-</div>
+<p><strong>Matplotlib</strong> es una librería muy utilizada en Python para la creación de gráficos en 2D. Es altamente personalizable y permite crear una amplia variedad de gráficos, desde gráficos de líneas simples hasta complejas visualizaciones como gráficos de barras, histogramas y diagramas de dispersión.</p>
 </div>
 <div class="sect2">
-<h3 id="_ejercicio_7_directorio_telefónico">Ejercicio 7: Directorio Telefónico</h3>
+<h3 id="_instalación">Instalación</h3>
 <div class="paragraph">
-<p>Gestiona contactos usando un diccionario.</p>
+<p>Para utilizar Matplotlib, primero debes instalarla usando <code>pip</code>, si no está ya instalada:</p>
 </div>
-</div>
-<div class="sect2">
-<h3 id="_ejercicio_8_ordenador_de_números">Ejercicio 8: Ordenador de Números</h3>
-<div class="paragraph">
-<p>Ordena una lista de números ingresados por el usuario.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_ejercicio_9_buscador_de_palabras">Ejercicio 9: Buscador de Palabras</h3>
-<div class="paragraph">
-<p>Cuenta cuántas veces aparece una palabra en una frase.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_ejercicio_10_calculadora_de_promedios">Ejercicio 10: Calculadora de Promedios</h3>
-<div class="paragraph">
-<p>Calcula el promedio de una lista de calificaciones.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_ejercicios_de_manipulación_de_archivos">Ejercicios de Manipulación de Archivos</h2>
-<div class="sectionbody">
-<div class="sect2">
-<h3 id="_ejercicio_11_bloc_de_notas_simple">Ejercicio 11: Bloc de Notas Simple</h3>
-<div class="paragraph">
-<p>Guarda y lee notas en un archivo de texto.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_ejercicio_12_registro_de_gastos">Ejercicio 12: Registro de Gastos</h3>
-<div class="paragraph">
-<p>Guarda gastos en un CSV y calcula totales.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_ejercicio_13_organizador_de_archivos">Ejercicio 13: Organizador de Archivos</h3>
-<div class="paragraph">
-<p>Mueve archivos según su extensión a carpetas específicas.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_ejercicio_14_logger_simple">Ejercicio 14: Logger Simple</h3>
-<div class="paragraph">
-<p>Registra eventos con fecha y hora en un archivo log.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_ejercicio_15_gestor_de_tareas">Ejercicio 15: Gestor de Tareas</h3>
-<div class="paragraph">
-<p>Maneja una lista de tareas pendientes en un archivo.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_ejercicios_de_algoritmos">Ejercicios de Algoritmos</h2>
-<div class="sectionbody">
-<div class="sect2">
-<h3 id="_ejercicio_16_validador_de_palíndromos">Ejercicio 16: Validador de Palíndromos</h3>
-<div class="paragraph">
-<p>Verifica si una palabra o frase es un palíndromo.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_ejercicio_17_generador_de_contraseñas">Ejercicio 17: Generador de Contraseñas</h3>
-<div class="paragraph">
-<p>Crea contraseñas aleatorias según criterios especificados.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_ejercicio_18_calculadora_de_números_primos">Ejercicio 18: Calculadora de Números Primos</h3>
-<div class="paragraph">
-<p>Determina si un número es primo y encuentra primos en un rango.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_ejercicio_19_juego_de_ahorcado">Ejercicio 19: Juego de Ahorcado</h3>
-<div class="paragraph">
-<p>Implementa el clásico juego de adivinar palabras.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_ejercicio_20_calculadora_de_estadísticas">Ejercicio 20: Calculadora de Estadísticas</h3>
-<div class="paragraph">
-<p>Calcula media, mediana y moda de una serie de números.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_características_sugeridas_para_cada_ejercicio">Características Sugeridas para Cada Ejercicio</h2>
-<div class="sectionbody">
-<div class="ulist">
-<ul>
-<li>
-<p>Validación de entradas</p>
-</li>
-<li>
-<p>Manejo de errores</p>
-</li>
-<li>
-<p>Menú de opciones</p>
-</li>
-<li>
-<p>Función de salida</p>
-</li>
-<li>
-<p>Persistencia de datos (cuando aplique)</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_estructura_básica_recomendada">Estructura Básica Recomendada</h2>
-<div class="sectionbody">
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">def main():
-    while True:
-        print("\n=== Menú Principal ===")
-        print("1. Opción 1")
-        print("2. Opción 2")
-        print("3. Salir")
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">pip install matplotlib</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Para habilitar un entorno de Jupyter Notebook, puedes usar el siguiente comando:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">pip install ipykernel
+python -m ipykernel install --user --name=mi_entorno</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Esto instalará Matplotlib y la configurará para su uso en Jupyter Notebook. Asegúrate de reiniciar el kernel después de la instalación.</p>
+</div>
+<div class="listingblock">
+<div class="title">Una vez instalada, puedes importarla en tu programa de Python:</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">import matplotlib.pyplot as plt</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>La interfaz más común que se utiliza en Matplotlib es <code>pyplot</code>, que ofrece una forma sencilla de crear gráficos con una sintaxis similar a MATLAB.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_creación_de_gráficos">Creación de Gráficos</h3>
+<div class="paragraph">
+<p>Matplotlib es muy flexible, lo que permite crear gráficos complejos con detalles personalizados. A continuación se muestran algunos ejemplos básicos de los tipos más comunes de gráficos.</p>
+</div>
+<div class="sect3">
+<h4 id="_gráfico_de_líneas">Gráfico de Líneas</h4>
+<div class="paragraph">
+<p>El gráfico de líneas es uno de los gráficos más utilizados para mostrar una serie temporal o una tendencia en los datos.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">import matplotlib.pyplot as plt
 
-        opcion = input("\nSeleccione una opción: ")
+# Datos para el gráfico
+x = [0, 1, 2, 3, 4, 5]
+y = [0, 1, 4, 9, 16, 25]
 
-        if opcion == "1":
-            # Función 1
-            pass
-        elif opcion == "2":
-            # Función 2
-            pass
-        elif opcion == "3":
-            print("¡Hasta luego!")
-            break
-        else:
-            print("Opción no válida")
+# Crear el gráfico de líneas
+plt.plot(x, y)
 
-if __name__ == "__main__":
-    main()</code></pre>
+# Añadir etiquetas y título
+plt.xlabel('Eje X')
+plt.ylabel('Eje Y')
+plt.title('Gráfico de Líneas')
+
+# Mostrar el gráfico
+plt.show()</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Este código genera un gráfico de líneas donde el eje X muestra los valores de <code>x</code> y el eje Y los valores correspondientes de <code>y</code>.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_gráfico_de_barras">Gráfico de Barras</h4>
+<div class="paragraph">
+<p>El gráfico de barras es útil para comparar diferentes categorías.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">import matplotlib.pyplot as plt
+
+# Datos para el gráfico de barras
+categories = ['A', 'B', 'C', 'D']
+values = [4, 7, 1, 8]
+
+# Crear el gráfico de barras
+plt.bar(categories, values)
+
+# Añadir etiquetas y título
+plt.xlabel('Categorías')
+plt.ylabel('Valores')
+plt.title('Gráfico de Barras')
+
+# Mostrar el gráfico
+plt.show()</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>En este caso, creamos un gráfico de barras que compara el valor de diferentes categorías.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_histograma">Histograma</h4>
+<div class="paragraph">
+<p>Un histograma muestra la distribución de un conjunto de datos.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">import matplotlib.pyplot as plt
+
+# Datos para el histograma
+data = [1, 2, 2, 2, 3, 3, 3, 4, 4, 4, 5, 5, 5, 5, 5]
+
+# Crear el histograma
+plt.hist(data, bins=5, edgecolor='black')
+
+# Añadir título y etiquetas
+plt.xlabel('Valor')
+plt.ylabel('Frecuencia')
+plt.title('Histograma')
+
+# Mostrar el gráfico
+plt.show()</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Este histograma agrupa los datos en cinco bins y muestra la frecuencia de cada valor.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_gráfico_de_dispersión">Gráfico de Dispersión</h4>
+<div class="paragraph">
+<p>El gráfico de dispersión se utiliza para mostrar la relación entre dos variables numéricas.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">import matplotlib.pyplot as plt
+
+# Datos para el gráfico de dispersión
+x = [5, 7, 8, 7, 2, 17, 2, 9, 4, 11, 12, 9, 6]
+y = [99, 86, 87, 88, 100, 86, 103, 87, 94, 78, 77, 85, 86]
+
+# Crear el gráfico de dispersión
+plt.scatter(x, y)
+
+# Añadir etiquetas y título
+plt.xlabel('Eje X')
+plt.ylabel('Eje Y')
+plt.title('Gráfico de Dispersión')
+
+# Mostrar el gráfico
+plt.show()</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Este gráfico de dispersión permite visualizar si hay alguna relación entre las dos variables <code>x</code> e <code>y</code>.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_personalización_de_gráficos">Personalización de Gráficos</h3>
+<div class="paragraph">
+<p>Matplotlib permite personalizar los gráficos de muchas maneras, desde cambiar los colores y estilos de las líneas hasta agregar múltiples gráficos en una misma figura.</p>
+</div>
+<div class="sect3">
+<h4 id="_cambiar_el_color_y_estilo_de_las_líneas">Cambiar el Color y Estilo de las Líneas</h4>
+<div class="paragraph">
+<p>Puedes cambiar fácilmente el color y el estilo de las líneas en un gráfico.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">plt.plot(x, y, color='red', linestyle='--', marker='o')
+plt.show()</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Este ejemplo dibuja una línea roja, con estilo de línea discontinua (<code>--</code>) y marca los puntos con círculos (<code>o</code>).</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_subplots">Subplots</h4>
+<div class="paragraph">
+<p>Matplotlib permite crear varios gráficos en una misma figura utilizando <code>subplots</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">import matplotlib.pyplot as plt
+
+# Crear una figura con dos subplots
+fig, (ax1, ax2) = plt.subplots(1, 2)
+
+# Primer gráfico de líneas
+ax1.plot([1, 2, 3, 4], [10, 20, 25, 30])
+ax1.set_title('Gráfico de Líneas')
+
+# Segundo gráfico de barras
+ax2.bar(['A', 'B', 'C'], [5, 7, 3])
+ax2.set_title('Gráfico de Barras')
+
+# Mostrar ambos gráficos
+plt.show()</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Este código crea una figura con dos subplots: uno con un gráfico de líneas y otro con un gráfico de barras.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_resumen">Resumen</h3>
+<div class="paragraph">
+<p>Matplotlib es una herramienta extremadamente versátil que permite a los usuarios crear gráficos simples y complejos con una gran capacidad de personalización. Desde gráficos de líneas y barras hasta histogramas y gráficos de dispersión, Matplotlib proporciona todas las herramientas necesarias para visualizar datos en 2D.</p>
 </div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_consejos_de_implementación">Consejos de Implementación</h2>
+<h2 id="_seaborn">Seaborn</h2>
 <div class="sectionbody">
-<div class="ulist">
-<ul>
-<li>
-<p>Usar funciones para organizar el código</p>
-</li>
-<li>
-<p>Implementar validación de entrada</p>
-</li>
-<li>
-<p>Manejar excepciones apropiadamente</p>
-</li>
-<li>
-<p>Mantener el código limpio y comentado</p>
-</li>
-<li>
-<p>Seguir PEP 8 para estilo de código</p>
-</li>
-</ul>
+<div class="paragraph">
+<p><strong>Seaborn</strong> es una librería de visualización de datos basada en Matplotlib que proporciona una interfaz de alto nivel para crear gráficos estadísticos atractivos. Seaborn facilita la creación de gráficos complejos y mejora la estética de las visualizaciones por defecto, lo que la convierte en una excelente opción para análisis exploratorios de datos.</p>
+</div>
+<div class="sect2">
+<h3 id="_instalación_2">Instalación</h3>
+<div class="paragraph">
+<p>Para instalar Seaborn, utiliza el siguiente comando:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">pip install seaborn</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Seaborn también requiere Matplotlib y Pandas, que suelen instalarse automáticamente como dependencias.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_uso_básico_de_seaborn">Uso Básico de Seaborn</h3>
+<div class="paragraph">
+<p>Seaborn trabaja muy bien con <code>DataFrames</code> de Pandas, lo que permite crear gráficos directamente a partir de datos tabulares. A continuación se muestra un ejemplo básico:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">import seaborn as sns
+import matplotlib.pyplot as plt
+import pandas as pd
+
+# Crear un DataFrame simple
+data = pd.DataFrame({
+    'x': [1, 2, 3, 4, 5],
+    'y': [5, 4, 3, 2, 1],
+    'z': [1, 3, 5, 7, 9]
+})
+
+# Crear un gráfico de dispersión con Seaborn
+sns.scatterplot(x='x', y='y', data=data)
+plt.title('Gráfico de Dispersión con Seaborn')
+plt.show()</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Este ejemplo muestra cómo crear un gráfico de dispersión con Seaborn usando un DataFrame de Pandas. El gráfico muestra la relación entre las variables <code>x</code> e <code>y</code>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_principales_tipos_de_gráficos_en_seaborn">Principales Tipos de Gráficos en Seaborn</h3>
+<div class="paragraph">
+<p>Seaborn ofrece una gran variedad de gráficos que son útiles para el análisis estadístico y exploración de datos.</p>
+</div>
+<div class="sect3">
+<h4 id="_gráfico_de_dispersión_2">Gráfico de Dispersión</h4>
+<div class="paragraph">
+<p>El gráfico de dispersión muestra la relación entre dos variables numéricas. En Seaborn se puede crear con <code>scatterplot</code> y se puede agregar color basado en otra variable.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">sns.scatterplot(x='x', y='y', hue='z', data=data)
+plt.title('Gráfico de Dispersión con Hue')
+plt.show()</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>En este caso, el parámetro <code>hue</code> permite colorear los puntos del gráfico de acuerdo con los valores de la variable <code>z</code>.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_gráfico_de_línea">Gráfico de Línea</h4>
+<div class="paragraph">
+<p>El gráfico de línea se utiliza para visualizar datos a lo largo de un rango continuo, como el tiempo.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">sns.lineplot(x='x', y='z', data=data)
+plt.title('Gráfico de Línea')
+plt.show()</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Este ejemplo genera un gráfico de líneas donde <code>x</code> es el eje de las abscisas y <code>z</code> representa los valores a lo largo de ese eje.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_gráfico_de_caja_boxplot">Gráfico de Caja (Boxplot)</h4>
+<div class="paragraph">
+<p>Un gráfico de caja es útil para visualizar la distribución de los datos y detectar valores atípicos.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python"># Cargar el dataset de ejemplo 'tips'
+tips = sns.load_dataset('tips')
+
+# Crear un gráfico de caja
+sns.boxplot(x='day', y='total_bill', data=tips)
+plt.title('Gráfico de Caja')
+plt.show()</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Este ejemplo muestra la distribución de la variable <code>total_bill</code> por cada día de la semana en el dataset de ejemplo <code>tips</code>.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_gráfico_de_violin">Gráfico de Violin</h4>
+<div class="paragraph">
+<p>El gráfico de violín es una combinación entre el gráfico de caja y el gráfico de densidad, mostrando la distribución de los datos de manera más detallada.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">sns.violinplot(x='day', y='total_bill', data=tips)
+plt.title('Gráfico de Violín')
+plt.show()</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Este gráfico no solo muestra los cuantiles de los datos, sino también la densidad estimada de las distribuciones.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_mapa_de_calor_heatmap">Mapa de Calor (Heatmap)</h4>
+<div class="paragraph">
+<p>Un mapa de calor es útil para visualizar matrices de datos o correlaciones entre variables.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python"># Crear una matriz de correlación
+correlation_matrix = tips.corr()
+
+# Crear un mapa de calor
+sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm')
+plt.title('Mapa de Calor de Correlación')
+plt.show()</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Este código genera un mapa de calor que muestra la correlación entre las diferentes variables del dataset <code>tips</code>, con anotaciones en cada celda para ver los valores exactos.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_personalización_de_gráficos_en_seaborn">Personalización de Gráficos en Seaborn</h3>
+<div class="paragraph">
+<p>Seaborn facilita la personalización de gráficos con estilos predefinidos y opciones de ajuste para colores y tamaños.</p>
+</div>
+<div class="sect3">
+<h4 id="_cambiar_el_estilo_del_gráfico">Cambiar el Estilo del Gráfico</h4>
+<div class="paragraph">
+<p>Seaborn permite cambiar fácilmente el estilo de los gráficos usando <code>set_style()</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python"># Cambiar el estilo del gráfico
+sns.set_style('whitegrid')
+
+# Crear un gráfico con el nuevo estilo
+sns.lineplot(x='x', y='z', data=data)
+plt.title('Gráfico de Línea con Estilo Personalizado')
+plt.show()</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Este código aplica el estilo <code>whitegrid</code>, que añade una cuadrícula blanca al fondo del gráfico.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_cambiar_la_paleta_de_colores">Cambiar la Paleta de Colores</h4>
+<div class="paragraph">
+<p>También se puede personalizar la paleta de colores del gráfico.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python"># Cambiar la paleta de colores
+sns.set_palette('pastel')
+
+# Crear un gráfico con la nueva paleta de colores
+sns.boxplot(x='day', y='total_bill', data=tips)
+plt.title('Gráfico de Caja con Colores Pastel')
+plt.show()</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>En este ejemplo, se cambia la paleta de colores del gráfico a tonos pastel.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_comparación_entre_seaborn_y_matplotlib">Comparación entre Seaborn y Matplotlib</h3>
+<div class="paragraph">
+<p>Aunque Seaborn está construido sobre Matplotlib, las diferencias entre ambas librerías son notables:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Característica</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Matplotlib</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Seaborn</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Flexibilidad</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Muy alta, control detallado</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Menor flexibilidad, más enfoque en lo estadístico</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Facilidad de uso</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Complejo para gráficos personalizados</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Fácil para gráficos estadísticos</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Estética por defecto</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Básica, requiere ajustes</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Gráficos atractivos por defecto</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Gráficos estadísticos</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Limitado</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Extenso y específico para estadística</p></td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_conceptos_python_utilizados">Conceptos Python Utilizados</h2>
+<h2 id="_ejercicios_de_representación_de_datos_con_matplotlib_o_seaborn">Ejercicios de Representación de Datos con Matplotlib o Seaborn</h2>
 <div class="sectionbody">
-<div class="ulist">
-<ul>
+<div class="paragraph">
+<p>A continuación, te presento una lista de 10 ejercicios que pueden resolverse utilizando <strong>Matplotlib</strong> o <strong>Seaborn</strong>:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
 <li>
-<p>Variables y tipos de datos</p>
+<p><strong>Gráfico de líneas</strong>: Dibuja un gráfico de líneas que muestre la evolución de la temperatura a lo largo de los días de la semana. Asegúrate de etiquetar los ejes y agregar un título.</p>
 </li>
 <li>
-<p>Estructuras de control (if, while, for)</p>
+<p><strong>Gráfico de barras</strong>: Crea un gráfico de barras que muestre las ventas de diferentes productos en una tienda. Etiqueta correctamente cada producto y asigna un color distinto a cada barra.</p>
 </li>
 <li>
-<p>Funciones y parámetros</p>
+<p><strong>Histograma</strong>: Representa un histograma que muestre la distribución de edades de un grupo de personas. Ajusta el número de "bins" para obtener un gráfico claro.</p>
 </li>
 <li>
-<p>Listas, tuplas y diccionarios</p>
+<p><strong>Gráfico de dispersión</strong>: Crea un gráfico de dispersión para visualizar la relación entre el tamaño de un anuncio y el número de clics que recibe en una campaña publicitaria.</p>
 </li>
 <li>
-<p>Manejo de archivos</p>
+<p><strong>Mapa de calor</strong>: Genera un mapa de calor que muestre las correlaciones entre varias características en un conjunto de datos de rendimiento académico (por ejemplo, asistencia, calificaciones, horas de estudio).</p>
 </li>
 <li>
-<p>Módulos básicos (random, datetime, os)</p>
+<p><strong>Gráfico de violín</strong>: Utiliza un gráfico de violín para comparar la distribución de los ingresos anuales en función del nivel educativo en un conjunto de datos de encuestas laborales.</p>
 </li>
 <li>
-<p>Manejo de excepciones</p>
+<p><strong>Subplots</strong>: Dibuja dos gráficos en una misma figura (usando subplots), uno mostrando las ganancias anuales de una empresa como un gráfico de barras y otro mostrando la tendencia de crecimiento en un gráfico de líneas.</p>
 </li>
 <li>
-<p>Formateo de strings</p>
+<p><strong>Gráfico de caja</strong>: Representa un gráfico de caja para visualizar la dispersión de los salarios en diferentes sectores industriales y detectar posibles valores atípicos.</p>
 </li>
-</ul>
+<li>
+<p><strong>Gráfico de barras apiladas</strong>: Crea un gráfico de barras apiladas que muestre la participación de mercado de varias marcas de automóviles durante los últimos cinco años.</p>
+</li>
+<li>
+<p><strong>Gráfico de áreas</strong>: Representa un gráfico de áreas para visualizar el consumo de diferentes fuentes de energía (renovable, no renovable) a lo largo de las últimas décadas en varios países.</p>
+</li>
+</ol>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-03-17 16:03:34 +0100
+Last updated 2025-04-07 13:08:44 +0200
 </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/highlight.min.js"></script>

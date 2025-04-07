@@ -815,7 +815,56 @@ plt.grid()
 plt.show()
 ----
 
-== Módulo 8: Ejercicios
+== Módulo 8: Abrir y guardar archivos con numpy
+
+NumPy ofrece funciones que facilitan la lectura y escritura de archivos de texto para manejar datos numéricos.
+
+=== Abrir archivos
+
+* np.genfromtxt():  
+  Permite leer archivos de texto que pueden incluir encabezados y datos faltantes.
+
+[source,python]
+----
+import numpy as np
+
+# Leer un archivo CSV que contiene un encabezado (se salta la primera línea)
+data = np.genfromtxt('datos.csv', delimiter=',', skip_header=1)
+print(data)
+----
+
+* np.loadtxt():  
+  Es útil para archivos sin encabezado o valores perdidos, realizando una lectura directa.
+
+[source,python]
+----
+import numpy as np
+
+# Leer un archivo de texto sin encabezado
+data = np.loadtxt('datos.txt', delimiter=',')
+print(data)
+----
+
+=== Guardar archivos
+
+* np.savetxt():  
+  Permite guardar un array en un archivo de texto, definiendo el delimitador y el formato de cada elemento.
+
+[source,python]
+----
+import numpy as np
+
+# Crear un array de ejemplo
+data = np.array([[1, 2, 3], [4, 5, 6]])
+
+# Guardar el array en un archivo CSV
+np.savetxt('salida.csv', data, delimiter=',', fmt='%d')
+----
+
+Estas herramientas integran a NumPy en flujos de trabajo para análisis y almacenamiento de datos de forma sencilla y eficiente.
+
+
+== Módulo 9: Ejercicios
 
 .Lista de 20 problemas prácticos utilizando la librería Numpy:
 1. Crea un array de 10 elementos con valores aleatorios entre 0 y 100, y encuentra el valor mínimo y máximo.
