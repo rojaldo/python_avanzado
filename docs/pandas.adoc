@@ -166,7 +166,7 @@ df = pd.DataFrame({'Nombre': ['Ana', 'Luis', 'María'], 'Edad': [23, 25, 22]})
 print(df['Nombre'])
 
 # Seleccionar filas con loc
-print(df.loc[0])  # Selecciona la primera fila
+print(df.loc['row_1'])  # Selecciona la fila con etiqueta 'row_1'
 
 # Seleccionar por índice con iloc
 print(df.iloc[1])  # Selecciona la segunda fila
