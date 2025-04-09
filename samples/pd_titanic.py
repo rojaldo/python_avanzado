@@ -63,6 +63,32 @@ print( f'hombres supervivientes: {number_of_men_survived/number_of_men:.2%}')
 print( f'mujeres supervivientes: {number_of_women_survived/number_of_women:.2%}')
 
 # media de la edad de los pasajeros
+
+mean_age = df['age'].mean()
+print(f"Media de la edad de los pasajeros: {mean_age:.2f}")
+
 # media, mediana y quartiles de la edad de los pasajeros supervivientes
+
+mean_age_survived = df[df['survived'] == 1]['age'].mean()
+median_age_survived = df[df['survived'] == 1]['age'].median()
+quartiles_age_survived = df[df['survived'] == 1]['age'].quantile([0.25, 0.5, 0.75])
+print(f"Media de la edad de los pasajeros supervivientes: {mean_age_survived:.2f}")
+print(f"Mediana de la edad de los pasajeros supervivientes: {median_age_survived:.2f}")
+print(f"Quartiles de la edad de los pasajeros supervivientes: {quartiles_age_survived.to_dict()}")
+
 # media, mediana y quartiles de la edad de los pasajeros no supervivientes
+
+mean_age_not_survived = df[df['survived'] == 0]['age'].mean()
+median_age_not_survived = df[df['survived'] == 0]['age'].median()
+quartiles_age_not_survived = df[df['survived'] == 0]['age'].quantile([0.25, 0.5, 0.75])
+print(f"Media de la edad de los pasajeros no supervivientes: {mean_age_not_survived:.2f}")
+print(f"Mediana de la edad de los pasajeros no supervivientes: {median_age_not_survived:.2f}")
+print(f"Quartiles de la edad de los pasajeros no supervivientes: {quartiles_age_not_survived.to_dict()}")
+
+# plot survivors by age
+
+age_not_survived = df[df['survived'] == 0]['age']
+
+age_not_survived.plot(kind='hist', bins=20, alpha=0.5, color='blue', label='No Supervivientes')
+
 
